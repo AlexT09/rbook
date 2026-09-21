@@ -6,7 +6,9 @@
 Determinar qué factores (categoría, región y segmento) explican el nivel de ventas
 (`Sales`)
 
-Chapter 3 ETL
+# ETL
+
+```{r etl}
 library(tidyverse)
 
 # --- Extracción ---
@@ -23,6 +25,14 @@ df <- df %>%
   ) %>%
   rename(Order_Date = `Order Date`) %>%
   arrange(Order_Date)
+
+# --- Carga ---
+write_csv(df, "superstore_transformado.csv")
+```
+
+Se convierten `Order Date` y `Ship Date` de texto a fecha usando `mdy()` de lubridate
+(formato mes/día/año, como vienen en el archivo), y con `arrange()` se ordenan las
+filas por fecha de pedido.
 
 # --- Carga ---
 write_csv(df, "superstore_transformado.csv")
